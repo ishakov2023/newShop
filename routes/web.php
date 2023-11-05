@@ -16,16 +16,21 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CatalogController;
 
 Route::view('/', 'home.index')->name('home');
-Route::get('registration', [RegisterController::class,'index'])->name('registration');
-Route::post('registration', [RegisterController::class,'store'])->name('registration.store');
+Route::middleware('guest')->group(function ()
+{
+    Route::get('registration', [RegisterController::class,'index'])->name('registration');
+    Route::post('registration', [RegisterController::class,'store'])->name('registration.store');
 
-Route::get('login',[LoginController::class,'index'])->name('login');
-Route::post('login',[LoginController::class,'store'])->name('login.store');
+    Route::get('login',[LoginController::class,'index'])->name('login');
+    Route::post('login',[LoginController::class,'store'])->name('login.store');
+});
+
 
 Route::prefix('user')->group(function ()
 {
-    Route::get('catalog',[CatalogController::class,'index'])->name('catalog');
-    Route::get('catalog/{catalog}',[CatalogController::class,'show'])->name('catalog.show');
+    Route::redirect('/','/user/catalog')->name('user');
+    Route::get('catalog',[CatalogController::class,'index'])->name('user.catalog');
+    Route::get('catalog/{catalog}',[CatalogController::class,'show'])->name('user.catalog.show');
 });
 
 Route::prefix('admin')->group(function ()

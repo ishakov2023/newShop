@@ -12,6 +12,7 @@ class LoginController extends Controller
     }
     public function store()
     {
-        return view('login.index');
+        session(['alert'=>__('Мега харош')]);
+        return redirect()->route('user.catalog');
     }
 }
