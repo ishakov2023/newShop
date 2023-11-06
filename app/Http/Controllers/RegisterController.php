@@ -11,13 +11,13 @@ class RegisterController extends Controller
     {
         return view('register.index');
     }
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        validator($request->all(),[
-            'name'=>['required','string','max:100'],
-            'email'=>['required','string','email'],/* unique:users*/
-            'password'=>['required','string','confirmed','min:3'],
-        ])->validated();
+//        validator($request->all(),[
+//            'name'=>['required','string','max:100'],
+//            'email'=>['required','string','email'],/* unique:users*/
+//            'password'=>['required','string','confirmed','min:3'],
+//        ])->validated();
         $agreement = $request->boolean('agreement');
         if($agreement===true){
             $email = $request->email;
