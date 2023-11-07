@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class RegisterController extends Controller
 {
@@ -13,20 +14,24 @@ class RegisterController extends Controller
     }
     public function store(StorePostRequest $request)
     {
-//        validator($request->all(),[
-//            'name'=>['required','string','max:100'],
-//            'email'=>['required','string','email'],/* unique:users*/
-//            'password'=>['required','string','confirmed','min:3'],
-//        ])->validated();
-        $agreement = $request->boolean('agreement');
-        if($agreement===true){
-            $email = $request->email;
-            $name = $request->name;
-            $password = $request->password;
-            session(['alert'=>__('Знаю что заебал, но давай еще раз логин и пароль')]);
-            return redirect()->route('login');
-        }else{
-            return redirect()->back();
-        }
+        $validate = $request->validated();
+        $user = new User;
+        $user->name = $validate['name'];
+        $user->email = $validate['email'];
+        $user->password = bcrypt($validate['password']);
+        $user->save();
+
+
+//        $agreement = $request->boolean('agreement');
+//        if($agreement===true){
+//            $email = $request->email;
+//            $name = $request->name;
+//            $password = $request->password;
+//            session(['alert'=>__('Знаю что заебал, но давай еще раз логин и пароль')]);
+//
+//        }else{
+//            return redirect()->back();
+//        }
+        return redirect()->route('login');
     }
 }

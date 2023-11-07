@@ -14,8 +14,7 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $email = $request->email;
-        $password = Hash::make($request->password);
-        dd($email,$password);
+        $password = $request->password;
         session(['alert'=>__('Мега харош')]);
         return redirect()->route('user.catalog');
     }
