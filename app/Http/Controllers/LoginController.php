@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
     return view('login.index');
     }
@@ -15,6 +15,7 @@ class LoginController extends Controller
     {
         $email = $request->email;
         $password = $request->password;
+        $remember = $request->boolean('remember');
         session(['alert'=>__('Мега харош')]);
         return redirect()->route('user.catalog');
     }

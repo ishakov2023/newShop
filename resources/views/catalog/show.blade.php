@@ -1,5 +1,5 @@
 @extends('layouts.base')
-@section('title',$catalogs->title)
+@section('title',$catalog->name)
 
 
 @section('content')
@@ -9,22 +9,22 @@
 
             <h1>
 
-                {{$catalogs->title}}
+                {{$catalog->name}}
 
             </h1>
 
             <p>
 
-                {{$catalogs->content}}
+                {{$catalog->description}}
 
             </p>
 
             <p class="small text-muted">
-                Цена : {{$catalogs->price}}
+                Цена : {{$catalog->price}}
             </p>
 
             <p class="small text-muted">
-                Количество : {{$catalogs->count}}
+                Количество : {{$catalog->amount}}
             </p>
 
             <a href="{{route('user.catalog')}}">

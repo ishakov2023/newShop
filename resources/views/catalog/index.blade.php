@@ -7,7 +7,7 @@
         <div class="container">
 
             <h1 class="mb-5">
-                {{__('Список постов')}}
+                {{__('Список товаров')}}
             </h1>
             <nav class="navbar navbar-expand-md bg-body-tertiary">
                 <div class="container">
@@ -17,29 +17,46 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbar-collapse">
+                    <form>
+                    <div class="col-12 " >
+                        <div class="mb-3">
+                            <select name="category_id"  class="form-control" value="{{request('category_id')}} " >
+                                @foreach($categories as $key=> $text)
+                                <option value="{{$key}}" {{($key == null) ? 'selected' : null}}>
+                                    {{$text}}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                        <ul class="navbar-nav">
+{{--                        <ul class="navbar-nav">--}}
 
-                            <li class="nav-item">
+{{--                            <li class="nav-item">--}}
 
-                                <a href="" class="nav-link " aria-current="page" >
-                                    {{__('Компьютеры')}}
-                                </a>
+{{--                                <a href="" class="nav-link " aria-current="page" >--}}
+{{--                                    {{__('Компьютеры')}}--}}
+{{--                                </a>--}}
 
-                            </li>
+{{--                            </li>--}}
 
-                            <li class="nav-item">
+{{--                            <li class="nav-item">--}}
 
-                                <a href="" class="nav-link" aria-current="page" >
-                                    {{__('Ноутбуки')}}
-                                </a>
+{{--                                <a href="" class="nav-link" aria-current="page" >--}}
+{{--                                    {{__('Ноутбуки')}}--}}
+{{--                                </a>--}}
 
-                            </li>
+{{--                            </li>--}}
 
-                        </ul>
+{{--                        </ul>--}}
+
 
                     </div>
+                        <div class="col-12 col-md-4">
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary">{{__('Применить')}}</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </nav>
 
@@ -53,19 +70,21 @@
             @else
                 <div class="row">
                     @foreach($catalog as $catalogs)
+
+{{--                        @dd($catalogs)--}}
                         <div class="col-12 col-md-4">
                             <div class="mb-4 card">
                                 <div class="card-body">
                                     <h5>
-                                        <a href="{{route('user.catalog.show',$catalogs->id)}}">
-                                            {{$catalogs->title}}
+                                        <a href="{{route('user.catalog.show',$catalogs['id'])}}">
+                                            {{$catalogs['name']}}
                                         </a>
                                     </h5>
                                     <p class="small text-muted">
-                                        Цена : {{$catalogs->price}}
+                                        Цена : {{$catalogs['price']}}
                                     </p>
                                     <p class="small text-muted">
-                                        Количество : {{$catalogs->count}}
+                                        Количество : {{$catalogs['amount']}}
                                     </p>
                                     <p class="small text-muted">
                                         {{now()->format('d.m.Y')}}

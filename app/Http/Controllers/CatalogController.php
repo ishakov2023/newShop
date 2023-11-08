@@ -2,34 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class CatalogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $catalogs =(object)
-        [
-            'id'=> 123,
-            'title'=> 'компьютер',
-            'content'=>'купи копьютер',
-            'price'=>'1000',
-            'count'=>'4',
+        $category_id = $request->input('category_id');
+        $catalogFil = Product::query()->get(['id','name','price','amount','category_id'])->toArray();
+        $categories = [
+            null =>__('Все товары'),
+            1 => __('ПК'),
+            2 => __('Ноутбуки'),
         ];
-        $catalog = array_fill(0,10,$catalogs);;
-        return view('catalog.index',compact('catalog'));
+        $catalog = array_filter($catalogFil,function ($catalogs) use ($category_id){
+            if ($category_id && $catalogs['category_id'] != $category_id){
+                return false;
+            }
+            return true;
+        });
+//        ХУЙНЯ ПЕРЕДЕЛАТЬ
+
+
+
+        return view('catalog.index',compact('catalog','categories'));
 
     }
-    public function show($catalogs)
+    public function show(Request $request,Product $catalog)
     {
-        $catalogs =(object)
-        [
-            'id'=> 123,
-            'title'=> 'компьютер',
-            'content'=>'купи копьютер',
-            'price'=>'1000',
-            'count'=>'4',
-        ];
-        return view('catalog.show',compact('catalogs'));
+
+        return view('catalog.show',compact('catalog'));
     }
 }
