@@ -15,6 +15,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CatalogController;
 use App\Models\User;
+use App\Http\Controllers\TestController;
 
 Route::view('/', 'home.index')->name('home');
 Route::middleware('guest')->group(function ()
@@ -42,6 +43,4 @@ Route::prefix('admin')->group(function ()
     Route::put('catalog/{catalog}',[CatalogController::class,'update'])->name('catalog.update');
     Route::delete('catalog/{catalog}',[CatalogController::class,'delete'])->name('catalog.delete');
 });
-Route::get('test', function (){
-    return User::first()->toJson();
-});
+Route::get('test',[TestController::class,'index']);

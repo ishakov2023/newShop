@@ -21,9 +21,12 @@
                     <div class="col-12 " >
                         <div class="mb-3">
                             <select name="category_id"  class="form-control" value="{{request('category_id')}} " >
-                                @foreach($categories as $key=> $text)
-                                <option value="{{$key}}" {{($key == null) ? 'selected' : null}}>
-                                    {{$text}}
+                                <option value="">
+                                    Все товары
+                                </option>
+                                @foreach($categories as $category)
+                                <option value="{{$category->id}}">
+                                    {{$category->name}}
                                 </option>
                                 @endforeach
                             </select>
@@ -76,15 +79,15 @@
                             <div class="mb-4 card">
                                 <div class="card-body">
                                     <h5>
-                                        <a href="{{route('user.catalog.show',$catalogs['id'])}}">
-                                            {{$catalogs['name']}}
+                                        <a href="{{route('user.catalog.show',$catalogs->id)}}">
+                                            {{$catalogs->name}}
                                         </a>
                                     </h5>
                                     <p class="small text-muted">
-                                        Цена : {{$catalogs['price']}}
+                                        Цена : {{$catalogs->price}}
                                     </p>
                                     <p class="small text-muted">
-                                        Количество : {{$catalogs['amount']}}
+                                        Количество : {{$catalogs->amount}}
                                     </p>
                                     <p class="small text-muted">
                                         {{now()->format('d.m.Y')}}
