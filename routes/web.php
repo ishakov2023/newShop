@@ -24,9 +24,9 @@ Route::middleware('guest')->group(function ()
     Route::post('registration', [RegisterController::class,'store'])->name('registration.store');
 
     Route::get('login',[LoginController::class,'index'])->name('login');
-    Route::post('login',[LoginController::class,'store'])->name('login.store');
+    Route::post('login',[LoginController::class,'login'])->name('login.login');
 });
-
+Route::post('logout',[LoginController::class,'logout'])->name('login.logout');
 
 Route::prefix('user')->group(function ()
 {

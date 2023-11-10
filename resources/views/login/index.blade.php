@@ -23,7 +23,7 @@
                         @endcomponent
 
                         @component('components.card-body')
-                            <form action="{{route('login.store')}}" method="POST">
+                            <form action="{{route('login.login')}}" method="POST">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 @component('components.form-item')
 

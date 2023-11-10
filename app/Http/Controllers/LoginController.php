@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Serves\LoginService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -11,12 +12,19 @@ class LoginController extends Controller
     {
     return view('login.index');
     }
-    public function store(Request $request)
+    public function login(Request $request)
     {
-        $email = $request->email;
-        $password = $request->password;
-        $remember = $request->boolean('remember');
-        session(['alert'=>__('Мега харош')]);
-        return redirect()->route('user.catalog');
+        $userData= $request->only('email', 'password');
+        $remember = $request->input('remember');
+        if (Auth::attempt($userData,$remember)) {
+            return redirect()->route('user.catalog');
+        }else{
+            return redirect()->route('login');
+        }
+    }
+    public function logout(){
+        Auth::logout();
+
+        redirect()->route('login');
     }
 }
