@@ -38,6 +38,13 @@
                     </a>
 
                 </li>
+                <li class="nav-item">
+
+                    <a href="{{route('user.catalog')}}" class="nav-link {{Route::is('catalog.index') ? 'active' : ''}} " aria-current="page" >
+                        {{__('Каталог')}}
+                    </a>
+
+                </li>
 
             </ul>
 

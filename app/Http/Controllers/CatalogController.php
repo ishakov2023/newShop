@@ -7,6 +7,7 @@ use App\Serves\CatalogService;
 use App\Serves\CategoryService;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 class CatalogController extends Controller
 {
@@ -15,7 +16,8 @@ class CatalogController extends Controller
         $categoryId = $request->input('category_id');
         $categories = $categoryService->getAllCategory();
         $catalog = $catalogService->filterProducts($categoryId);
-        return view('catalog.index',compact('catalog','categories'));
+        $user = Auth::user();
+        return view('catalog.index',compact('catalog','categories','user'));
 
     }
     public function show(Request $request,Product $catalog)

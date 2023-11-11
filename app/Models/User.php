@@ -19,10 +19,10 @@ class User extends Model implements Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'admin',
     ];
     protected $casts = [
         'admin' => 'boolean',
         'password' => 'encrypted'
     ];
+
 }

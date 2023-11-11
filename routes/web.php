@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CatalogController;
-use App\Models\User;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TestController;
 
 Route::view('/', 'home.index')->name('home');
@@ -28,7 +28,7 @@ Route::middleware('guest')->group(function ()
 });
 Route::post('logout',[LoginController::class,'logout'])->name('login.logout');
 
-Route::prefix('user')->group(function ()
+Route::prefix('user')->middleware('auth')->group(function ()
 {
     Route::redirect('/','/user/catalog')->name('user');
     Route::get('catalog',[CatalogController::class,'index'])->name('user.catalog');
@@ -37,6 +37,7 @@ Route::prefix('user')->group(function ()
 
 Route::prefix('admin')->group(function ()
 {
+    Route::get('admin',[AdminController::class ,'index'])->name('admin');
     Route::get('catalog/create',[CatalogController::class,'create'])->name('catalog.create');
     Route::get('catalog/{catalog}/edit',[CatalogController::class,'edit'])->name('catalog.edit');
     Route::post('catalog',[CatalogController::class,'store'])->name('catalog.store');
