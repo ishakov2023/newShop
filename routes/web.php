@@ -28,14 +28,14 @@ Route::middleware('guest')->group(function ()
 });
 Route::post('logout',[LoginController::class,'logout'])->name('login.logout');
 
-Route::prefix('user')->middleware('auth')->group(function ()
+Route::prefix('user')->middleware('auth:web')->group(function ()
 {
     Route::redirect('/','/user/catalog')->name('user');
     Route::get('catalog',[CatalogController::class,'index'])->name('user.catalog');
     Route::get('catalog/{catalog}',[CatalogController::class,'show'])->name('user.catalog.show');
 });
 
-Route::prefix('admin')->group(function ()
+Route::prefix('admin')->middleware('auth:admin')->group(function ()
 {
     Route::get('admin',[AdminController::class ,'index'])->name('admin');
     Route::get('catalog/create',[CatalogController::class,'create'])->name('catalog.create');

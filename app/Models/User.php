@@ -21,8 +21,10 @@ class User extends Model implements Authenticatable
         'remember_token',
     ];
     protected $casts = [
-        'admin' => 'boolean',
+        'admin'=>'boolean',
         'password' => 'encrypted'
     ];
-
+    public function admin(){
+        return $this->admin == true;
+    }
 }

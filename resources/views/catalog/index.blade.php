@@ -20,6 +20,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <form>
+                        @csrf
                         <div class="col-12 ">
                             <div class="mb-3">
                                 <select name="category_id" class="form-control" value="{{request('category_id')}} ">
@@ -64,7 +65,6 @@
                     </form>
                 </div>
             </nav>
-
 
             @if(empty($catalog))
 

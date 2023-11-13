@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Serves\LoginService;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -28,22 +29,25 @@ class LoginController extends Controller
     {
         $userData = $request->only('email', 'password');
         $remember = $request->input('remember');
-        if (Auth::attempt($userData, $remember)) {
-            if (Auth::user()->admin) {
-                return redirect()->route('admin');
-            } else {
+
+        if (Auth::guard('web')->attempt($userData, $remember) && !Auth::user()->admin)
+        {
                 return redirect()->route('user.catalog');
-            }
-        } else {
+        } elseif (Auth::guard('admin')->attempt($userData, $remember) && Auth::user()->admin)
+        {
+            return redirect()->route('admin');
+        }
+        else
+        {
             return redirect()->route('login');
         }
     }
 
     public function logout(Request $request)
     {
-        Auth::logout();
-//        $request->session()->invalidate();
-//        $request->session()->regenerateToken();
+        Auth::guard('web')->logout();
+        Auth::guard('admin')->logout();
+
         return view('login/index');
     }
 }
