@@ -11,9 +11,9 @@
             <div class="col-12 col-md-4">
                 <div class="mb-4 card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('login.logout')}}">
+                        <form method="POST" action="{{route('admin.logout')}}">
                             @csrf
-                            <input type="submit" value="Выход">
+                            <input type="submit" name ="logout" value="Выход">
                         </form>
                         {{--                                            <h3>--}}
                         {{--                                                <a href="{{route('login.logout')}}">--}}

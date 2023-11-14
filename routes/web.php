@@ -35,13 +35,3 @@ Route::prefix('user')->middleware('auth:web')->group(function ()
     Route::get('catalog/{catalog}',[CatalogController::class,'show'])->name('user.catalog.show');
 });
 
-Route::prefix('admin')->middleware('auth:admin')->group(function ()
-{
-    Route::get('admin',[AdminController::class ,'index'])->name('admin');
-    Route::get('catalog/create',[CatalogController::class,'create'])->name('catalog.create');
-    Route::get('catalog/{catalog}/edit',[CatalogController::class,'edit'])->name('catalog.edit');
-    Route::post('catalog',[CatalogController::class,'store'])->name('catalog.store');
-    Route::put('catalog/{catalog}',[CatalogController::class,'update'])->name('catalog.update');
-    Route::delete('catalog/{catalog}',[CatalogController::class,'delete'])->name('catalog.delete');
-});
-Route::get('test',[TestController::class,'index']);

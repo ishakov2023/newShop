@@ -29,15 +29,10 @@ class LoginController extends Controller
     {
         $userData = $request->only('email', 'password');
         $remember = $request->input('remember');
-
         if (Auth::guard('web')->attempt($userData, $remember) && !Auth::user()->admin)
         {
                 return redirect()->route('user.catalog');
-        } elseif (Auth::guard('admin')->attempt($userData, $remember) && Auth::user()->admin)
-        {
-            return redirect()->route('admin');
-        }
-        else
+        } else
         {
             return redirect()->route('login');
         }

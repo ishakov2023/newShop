@@ -25,6 +25,6 @@ class User extends Model implements Authenticatable
         'password' => 'encrypted'
     ];
     public function admin(){
-        return $this->admin == true;
+        return $this->admin;
     }
 }
