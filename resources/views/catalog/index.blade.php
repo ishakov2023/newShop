@@ -11,9 +11,6 @@
             </h1>
             <nav class="navbar navbar-expand-md bg-body-tertiary">
                 <div class="container">
-                    {{--        <a href="{{route('home')}}" class="navbar-brand" >--}}
-                    {{--            {{"Гавносайт"}}--}}
-                    {{--        </a>--}}
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -34,28 +31,6 @@
                                     @endforeach
                                 </select>
                             </div>
-
-                            {{--                        <ul class="navbar-nav">--}}
-
-                            {{--                            <li class="nav-item">--}}
-
-                            {{--                                <a href="" class="nav-link " aria-current="page" >--}}
-                            {{--                                    {{__('Компьютеры')}}--}}
-                            {{--                                </a>--}}
-
-                            {{--                            </li>--}}
-
-                            {{--                            <li class="nav-item">--}}
-
-                            {{--                                <a href="" class="nav-link" aria-current="page" >--}}
-                            {{--                                    {{__('Ноутбуки')}}--}}
-                            {{--                                </a>--}}
-
-                            {{--                            </li>--}}
-
-                            {{--                        </ul>--}}
-
-
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="mb-3">
@@ -115,6 +90,5 @@
                 </div>
             </div>
         </div>
-        @dd(Auth::user()->admin)
     </section>
 @endsection
