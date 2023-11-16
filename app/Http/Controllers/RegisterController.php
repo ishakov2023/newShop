@@ -15,12 +15,6 @@ class RegisterController extends Controller
     public function store(StorePostRequest $request)
     {
         $validate = $request->validated();
-//        $user = new User;
-//        $user->name = $validate['name'];
-//        $user->email = $validate['email'];
-//        $user->password = bcrypt($validate['password']);
-//        $user->save();
-
           $user = User::query()->create([
               'name' => $validate['name'],
               'email' => $validate['email'],

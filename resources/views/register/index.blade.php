@@ -52,11 +52,7 @@
 
                                     <input name="name" value="{{request()->old('name')}}" class="form-control"
                                            autofocus>
-                                    @error('name')
-                                    <div class="small text-danger ">
-                                        {{$message}}
-                                    </div>
-                                    @enderror
+
                                 @endcomponent
 
 

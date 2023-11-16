@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class CatalogController extends Controller
 {
+    public function __construct(){
+        $this->middleware('user');
+    }
     public function index(Request $request,CatalogService $catalogService,CategoryService $categoryService)
     {
         $categoryId = $request->input('category_id');

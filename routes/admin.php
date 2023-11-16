@@ -13,12 +13,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminProductController;
-Route::middleware('guest')->group(function (){
+Route::middleware('adminGuest')->group(function (){
 Route::get('admin',[AdminController::class ,'index'])->name('admin');
 Route::post('admin',[AdminController::class ,'login'])->name('admin.login');
 });
-Route::prefix('admin')->middleware('admin')->group(function ()
+Route::prefix('admin')->middleware(['auth','admin'])->group(function ()
 {
+    Route::redirect('/admin','/admin/admin')->name('adminRed');
     Route::get('admin',[AdminProductController::class,'index'])->name('admin.index');
     Route::get('admin/create',[AdminProductController::class,'create'])->name('admin.create');
     Route::get('admin/{catalog}/edit',[AdminProductController::class,'edit'])->name('admin.edit');

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class AdminMiddleware
+class RedirectAdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -14,11 +14,12 @@ class AdminMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $guard = null)
     {
-        if (!Auth::user()->admin()) {
-            return redirect()->route('login');
+        if (Auth::guard($guard)->check()) {
+            return redirect()->route('adminRed');
         }
+
         return $next($request);
     }
 }
