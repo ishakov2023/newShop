@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use App\Serves\CategoryService;
+use App\Serves\ServesCreatProduct;
+use App\Serves\ServesUpdateProduct;
 use Illuminate\Http\Request;
 
 class AdminProductController extends Controller
@@ -18,22 +20,17 @@ class AdminProductController extends Controller
         $products = $product->query()->get();
         return view('admin/admin',compact('products','categories'));
     }
-    public function store(ProductRequest $request){
-        $validate = $request->validated();
-        $product = Product::query()->create([
-            'name' => $validate['nameNew'],
-            'description' => $validate['descriptionNew'],
-            'price' => $validate['priceNew'],
-            'amount' => $validate['amountNew'],
-            'category_id' => $validate['categoryIdNew'],
-        ]);
-        $product->save();
+    public function store(ProductRequest $request,ServesCreatProduct $servesCreatProduct){
+         $servesCreatProduct->saveProduct($request);
+         return redirect()->back();
+    }
+    public function update(Request $request,$id,ServesUpdateProduct $servesUpdateProduct){
+        $servesUpdateProduct->updateProductServes($request,$id);
         return redirect()->back();
     }
-    public function update(Request $request,$id){
-        return $request->input('name',$id);
-    }
     public function delete($id){
+//            $product = Product::query()->where('id',  $id)->first();
+
          Product::query()->where('id',  $id)->delete();
          return redirect()->back();
     }

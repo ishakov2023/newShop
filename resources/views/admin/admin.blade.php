@@ -3,14 +3,11 @@
 
 
 @section('content')
-
     <section>
-
         @component('components.container')
             <div>
                 @foreach($products as $arr)
                     <form method="POST" action="{{route('admin.update',$arr->id)}}">
-                        {{method_field('PUT')}}
                         @csrf
                         <div class="">
                             <label>Название</label>
@@ -23,7 +20,7 @@
                             <input type="number" name="price" value="{{$arr->price}}" class="form-control">
 
                             <label>Количество</label>
-                            <input type="number" name="amount}" value="{{$arr->amount}}"
+                            <input type="number" name="amount" value="{{$arr->amount}}"
                                    class="form-control">
                             <label>Категория</label>
                             <select name="categoryId" class="form-control">
@@ -33,8 +30,13 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <input type="submit" value="Утвердить" name="update">
+                            <form method="POST" action="{{route('admin.update',$arr->id)}}">
+                                @method('PUT')
+                                @csrf
+                                <input type="submit" value="Утвердить" name="update">
+                            </form>
                             <form method="POST" action="{{route('admin.delete',$arr->id)}}">
+                                @csrf
                                 @method('DELETE')
                             <button type="submit" >Удалить</button><br>
                             </form>

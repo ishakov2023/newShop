@@ -21,4 +21,5 @@ class Product extends Model
             'amount' => 'integer',
 
         ];
+
 }
