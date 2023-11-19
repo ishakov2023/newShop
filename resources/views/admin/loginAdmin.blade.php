@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('admin.layoutsAdmin.base')
 @section('title','Админка')
 
 

@@ -19,8 +19,7 @@ class CatalogController extends Controller
         $categoryId = $request->input('category_id');
         $categories = $categoryService->getAllCategory();
         $catalog = $catalogService->filterProducts($categoryId);
-        $user = Auth::user();
-        return view('catalog.index',compact('catalog','categories','user'));
+        return view('catalog.index',compact('catalog','categories'));
 
     }
     public function show(Request $request,Product $catalog)

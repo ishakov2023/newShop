@@ -8,6 +8,7 @@ use App\Serves\CategoryService;
 use App\Serves\ServesCreatProduct;
 use App\Serves\ServesUpdateProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminProductController extends Controller
 {
@@ -18,7 +19,8 @@ class AdminProductController extends Controller
     {
         $categories = $categoryService->getAllCategory();
         $products = $product->query()->get();
-        return view('admin/admin',compact('products','categories'));
+        $user = Auth::user();
+        return view('admin/admin',compact('products','categories','user'));
     }
     public function store(ProductRequest $request,ServesCreatProduct $servesCreatProduct){
          $servesCreatProduct->saveProduct($request);

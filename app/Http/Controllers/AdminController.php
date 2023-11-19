@@ -15,7 +15,8 @@ class AdminController extends Controller
         $this->middleware('guest')->except('logout');
     }
     public function index(){
-        return view('admin.loginAdmin');
+        $user = Auth::user();
+        return view('admin.loginAdmin',compact('user'));
     }
     public function login(Request $request){
         $userData = $request->only('email', 'password');

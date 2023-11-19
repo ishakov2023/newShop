@@ -13,6 +13,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminProductController;
+use App\Http\Controllers\CategoryController;
 Route::middleware('adminGuest')->group(function (){
 Route::get('admin',[AdminController::class ,'index'])->name('admin');
 Route::post('admin',[AdminController::class ,'login'])->name('admin.login');
@@ -26,5 +27,11 @@ Route::prefix('admin')->middleware(['auth','admin'])->group(function ()
     Route::post('admin',[AdminProductController::class,'store'])->name('admin.store');
     Route::put('admin/{catalog}',[AdminProductController::class,'update'])->name('admin.update');
     Route::delete('admin/{catalog}',[AdminProductController::class,'delete'])->name('admin.delete');
+
+    Route::get('category',[CategoryController::class , 'index'])->name('category');
+    Route::post('category',[CategoryController::class,'store'])->name('category.store');
+    Route::put('category/{id}',[CategoryController::class,'update'])->name('category.update');
+    Route::delete('category/{id}',[CategoryController::class,'delete'])->name('category.delete');
+
 });
 Route::post('admin/logout',[AdminController::class,'logout'])->name('admin.logout');
