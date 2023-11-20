@@ -26,12 +26,28 @@
             <p class="small text-muted">
                 Количество : {{$catalog->amount}}
             </p>
+            <div class="col-12 col-md-4">
 
+                <form action="{{route('basket.create')}}" >
+                    <input type="hidden" value="{{$catalog->id}}" name="id">
+                    <button type="submit" name="add" class="btn btn-primary">{{__('Добавить')}}</button>
+                </form>
+                <br>
+                <form action="{{route('basket')}}" >
+                    <button type="submit" name="add" class="btn btn-primary">{{__('Корзина')}}</button>
+                </form>
+            </div>
+
+
+            <div>
+                <br>
+                <br>
             <a href="{{route('user.catalog')}}">
 
                 Назад
 
             </a>
+            </div>
         </div>
 
     </section>
