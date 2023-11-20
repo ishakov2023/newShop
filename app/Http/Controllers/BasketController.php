@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Basket;
 use App\Serves\ServiceBasket;
 use App\Serves\ServiceCreateBasket;
+use App\Serves\ServiceDeleteBasket;
 use App\Serves\ServiceUpdateBasket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,12 +34,9 @@ class BasketController extends Controller
         $updateBasket->updateBasket($request,$productId,$userId);
         return redirect()->back();
     }
-    public function delete(Request $request,$id){
+    public function delete(Request $request,$id,ServiceDeleteBasket $deleteBasket){
         $userId = Auth::user()->id;
-        $basket = Basket::query()->where(['product_id'=>$id,'user_id'=>$userId]);
-        if ($request->input('delete')){
-            $basket->delete();
-            return redirect()->back();
-        }
+        $deleteBasket->deleteBasket($request,$id,$userId);
+        return redirect()->back();
     }
 }
