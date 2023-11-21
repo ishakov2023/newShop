@@ -1,9 +1,10 @@
 <?php
-namespace App\Repositories;
+namespace App\Repositories\Category;
 
+use App\Contracts\Repositories\CategoryRepositoryContract;
 use App\Models\Category;
 
-class CategoryRepository
+class CategoryRepository implements CategoryRepositoryContract
 {
     private $category;
 
@@ -16,3 +17,4 @@ class CategoryRepository
         return $this->category->query()->get();
     }
 }
+

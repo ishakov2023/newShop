@@ -1,19 +1,20 @@
 <?php
 namespace App\Serves;
 
-use App\Repositories\CategoryRepository;
+use App\Contracts\Repositories\CategoryRepositoryContract;
+use App\Repositories\Category\CategoryRepository;
 
 class CategoryService
 {
-    private $categoryService;
+    private $categoryRepository;
 
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(CategoryRepositoryContract $categoryRepository)
     {
-        $this->categoryService=$categoryRepository;
+        $this->categoryRepository = $categoryRepository;
     }
     public function getAllCategory()
     {
-        return $this->categoryService->getAll();
+        return $this->categoryRepository->getAll();
     }
 
 }

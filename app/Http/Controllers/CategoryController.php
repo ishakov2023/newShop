@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Serves\CategoryService;
 use App\Serves\ServesStoreCategory;
 use App\Serves\ServesUpdateCategory;
 use Illuminate\Http\Request;
@@ -12,8 +13,8 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
-    public function index(Category $category){
-        $categories = $category->query()->get();
+    public function index(CategoryService  $categoryService){
+        $categories = $categoryService->getAllCategory();
         $user = Auth::user();
         return view('admin/category',compact('categories','user'));
     }

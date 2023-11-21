@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use App\Http\Controllers\BuyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
@@ -37,5 +39,9 @@ Route::prefix('user')->middleware(['auth','user'])->group(function ()
     Route::get('basket/create',[BasketController::class,'create'])->name('basket.create');
     Route::put('basket/{id}',[BasketController::class,'update'])->name('basket.update');
     Route::delete('basket/{id}',[BasketController::class,'delete'])->name('basket.delete');
+
+    Route::get('buy',[BuyController::class,'index'])->name('buy');
+    Route::put('buy/{id}',[BasketController::class,'update'])->name('buy.update');
+    Route::delete('buy/{id}',[BasketController::class,'delete'])->name('buy.delete');
 });
 

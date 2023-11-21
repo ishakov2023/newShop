@@ -5,6 +5,10 @@
 @section('content')
     <section>
         <div class="container">
+
+            @php
+                $sum = 0;
+            @endphp
             @if(count($products))
 
             @foreach($products as $product)
@@ -41,12 +45,24 @@
                     <input type="submit" value="Удалить" name="delete">
                 </form>
 
+                    @php
+                         $sum += $product->count * $product->price;
+                    @endphp
+
             @endforeach
+
+                <br>
+                <h4>
+                Ваша сумма заказа:{{$sum}}
+                </h4>
+                <br>
+                <form action="{{route('buy')}}" method="get">
+                    @csrf
+                    <input type="submit" value="Купить" name="buy">
+                </form>
                 @else
                 <h4>
-
                     Ваша корзина пуста
-
                 </h4>
                @endif
             <div>
@@ -59,6 +75,5 @@
                 </a>
             </div>
         </div>
-
     </section>
 @endsection
