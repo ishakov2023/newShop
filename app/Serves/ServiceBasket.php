@@ -2,13 +2,14 @@
 
 namespace App\Serves;
 
-use App\Repositories\RepositoryBasket;
+use App\Contracts\Repositories\BasketRepositoryContract;
+use App\Repositories\Basket\RepositoryBasket;
 
 class ServiceBasket
 {
         private $repository;
 
-        public function __construct(RepositoryBasket $repositoryBasket){
+        public function __construct(BasketRepositoryContract $repositoryBasket){
             $this->repository = $repositoryBasket;
         }
         public function productIsBasket($userId){

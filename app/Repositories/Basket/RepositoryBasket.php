@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Basket;
 
+use App\Contracts\Repositories\BasketRepositoryContract;
 use App\Models\Basket;
-use App\Models\Product;
 
-class RepositoryBasket
+class RepositoryBasket implements BasketRepositoryContract
 {
         public function basket($userId){
             return Basket::query()->where('user_id', $userId)

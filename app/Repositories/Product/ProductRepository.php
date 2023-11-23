@@ -1,27 +1,22 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Product;
 
-use App\Models\Category;
+use App\Contracts\Repositories\ProductRepositoryContract;
 use App\Models\Product;
 
-class ProductRepository
+class ProductRepository implements ProductRepositoryContract
 {
-    private $product;
-    public function __construct()
-    {
-        $this->product = new Product();
-    }
+
 
     public function getAll()
     {
-        return $this->product->query()->get();
+        return Product::query()->get();
     }
 
     public function getByCategoryId($categoryId = null)
     {
-        return $this->product
-            ->query()
+        return Product::query()
             ->when(!is_null($categoryId), function ($product) use ($categoryId) {
                 $product->where('category_id',$categoryId);
             })->get();

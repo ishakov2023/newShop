@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Models\Basket;
 use App\Models\Product;
 use App\Serves\CategoryService;
 use App\Serves\ServesCreatProduct;
 use App\Serves\ServesUpdateProduct;
+use App\Serves\ServiceDeleteAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AdminProductController extends Controller
 {
@@ -30,10 +33,8 @@ class AdminProductController extends Controller
         $servesUpdateProduct->updateProductServes($request,$id);
         return redirect()->back();
     }
-    public function delete($id){
-//            $product = Product::query()->where('id',  $id)->first();
-
-         Product::query()->where('id',  $id)->delete();
+    public function delete(ServiceDeleteAdmin $serviceDeleteAdmin,$id){
+            $serviceDeleteAdmin->deleteAdmin($id);
          return redirect()->back();
     }
 }

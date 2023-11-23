@@ -17,4 +17,8 @@ class Basket extends Model
             'count' => 'integer',
 
         ];
+    public function product()
+    {
+        return $this->hasOne(Product::class);
+    }
 }

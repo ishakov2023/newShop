@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\ProductCreate;
 
+use App\Contracts\Repositories\ProductCreatContract;
+use App\Contracts\Repositories\ProductRepositoryContract;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 
-class RepositoryCreatProduct
+class RepositoryCreatProduct implements ProductCreatContract
 {
   public function validateAll(ProductRequest $productRepository){
       $validate = $productRepository->validated();
@@ -15,6 +17,6 @@ class RepositoryCreatProduct
           'price' => $validate['priceNew'],
           'amount' => $validate['amountNew'],
           'category_id' => $validate['categoryIdNew'],
-      ]);
+      ])->save();
   }
 }

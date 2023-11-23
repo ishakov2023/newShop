@@ -2,14 +2,14 @@
 
 namespace App\Serves;
 
-use App\Repositories\ProductRepository;
-use Illuminate\Http\Request;
+use App\Contracts\Repositories\ProductRepositoryContract;
+use App\Repositories\Product\ProductRepository;
 
 class CatalogService
 {
     private $productRepository;
 
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(ProductRepositoryContract $productRepository)
     {
         $this->productRepository = $productRepository;
     }
