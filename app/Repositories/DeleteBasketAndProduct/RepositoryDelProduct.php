@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Repositories\AdminDelete;
+namespace App\Repositories\DeleteBasketAndProduct;
 
 use App\Contracts\Repositories\AdminDeleteContract;
 use App\Models\Basket;
 use App\Models\Product;
 
-class RepositoryAdminDel implements AdminDeleteContract
+class RepositoryDelProduct implements AdminDeleteContract
 {
     private $connect;
 

@@ -3,13 +3,14 @@
 namespace App\Serves;
 
 
-use App\Repositories\RepositoryUpdateProduct;
+use App\Contracts\Repositories\UpdateProductContract;
+use App\Repositories\UpdateProduct\RepositoryUpdateProduct;
 
 
 class ServesUpdateProduct
 {
     private $servesUpdate;
-    public function __construct(RepositoryUpdateProduct $repositoryUpdateProduct){
+    public function __construct(UpdateProductContract $repositoryUpdateProduct){
         $this->servesUpdate = $repositoryUpdateProduct;
     }
     public function updateProductServes($response,$id){

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Repositories\AdminDelete;
+namespace App\Repositories\DeleteBasketAndProduct;
 
 use App\Contracts\Repositories\AdminDeleteContract;
 use App\Models\Basket;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 
-class RepositoryRawAdminDel implements AdminDeleteContract
+class RepositoryRawDelProduct implements AdminDeleteContract
 {
     public function productBasketDelete($id): ?Product
     {

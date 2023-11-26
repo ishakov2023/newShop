@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Serves\CategoryService;
-use App\Serves\ServesStoreCategory;
+use App\Serves\ServesCreateCategory;
 use App\Serves\ServesUpdateCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +18,7 @@ class CategoryController extends Controller
         $user = Auth::user();
         return view('admin/category',compact('categories','user'));
     }
-    public function store(CategoryRequest $request,ServesStoreCategory $storeCategory){
+    public function store(CategoryRequest $request, ServesCreateCategory $storeCategory){
         $storeCategory->saveCategoryDB($request);
         return redirect()->back();
     }

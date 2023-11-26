@@ -11,7 +11,7 @@
 |
 */
 
-use App\Http\Controllers\BuyController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
@@ -40,8 +40,8 @@ Route::prefix('user')->middleware(['auth','user'])->group(function ()
     Route::put('basket/{id}',[BasketController::class,'update'])->name('basket.update');
     Route::delete('basket/{id}',[BasketController::class,'delete'])->name('basket.delete');
 
-    Route::get('buy',[BuyController::class,'index'])->name('buy');
-    Route::put('buy/{id}',[BasketController::class,'update'])->name('buy.update');
-    Route::delete('buy/{id}',[BasketController::class,'delete'])->name('buy.delete');
+    Route::get('order',[OrderController::class,'index'])->name('buy');
+    Route::put('order/{id}',[OrderController::class,'update'])->name('buy.update');
+    Route::delete('order/{id}',[OrderController::class,'delete'])->name('buy.delete');
 });
 

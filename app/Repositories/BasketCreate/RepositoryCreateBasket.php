@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\BasketCreate;
 
+use App\Contracts\Repositories\BasketCreateContract;
 use App\Models\Basket;
-use Illuminate\Http\Request;
 
-class RepositoryCreateBasket
+class RepositoryCreateBasket implements BasketCreateContract
 {
-    public function creatBasket($productId,$userId){
+    public function selectBasket($productId,$userId){
         $bask = Basket::query()->where(['product_id'=>$productId,'user_id'=>$userId])->get();
         if (($bask)->isEmpty()){
             return Basket::query()->create([

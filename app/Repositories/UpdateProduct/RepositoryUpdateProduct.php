@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\UpdateProduct;
 
+use App\Contracts\Repositories\UpdateProductContract;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class RepositoryUpdateProduct
+class RepositoryUpdateProduct implements UpdateProductContract
 {
     public function updateProduct(Request $request,$id)
     {
@@ -13,7 +15,7 @@ class RepositoryUpdateProduct
         $description = $request->description;
         $price = $request->price;
         $amount = $request->amount;
-        DB::table('products')
+        Product::query()
             ->where('id', $id)
             ->update(['name' => $name,
                 'description' => $description,

@@ -8,7 +8,7 @@ use App\Models\Product;
 use App\Serves\CategoryService;
 use App\Serves\ServesCreatProduct;
 use App\Serves\ServesUpdateProduct;
-use App\Serves\ServiceDeleteAdmin;
+use App\Serves\ServiceDelProductAndBasket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +33,7 @@ class AdminProductController extends Controller
         $servesUpdateProduct->updateProductServes($request,$id);
         return redirect()->back();
     }
-    public function delete(ServiceDeleteAdmin $serviceDeleteAdmin,$id){
+    public function delete(ServiceDelProductAndBasket $serviceDeleteAdmin, $id){
             $serviceDeleteAdmin->deleteAdmin($id);
          return redirect()->back();
     }

@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\DeleteBasket;
 
+use App\Contracts\Repositories\DeleteBasketContract;
 use App\Models\Basket;
 use Illuminate\Http\Request;
 
-class RepositoryDeleteBasket
+class RepositoryDeleteBasket implements DeleteBasketContract
 {
-        public function delete(Request $request,$id,$userId){
+        public function basketDestroy(Request $request,$id,$userId){
             if ($request->input('delete')){
                return Basket::query()->where(['product_id'=>$id,'user_id'=>$userId])->delete();
             }

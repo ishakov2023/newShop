@@ -2,19 +2,20 @@
 
 namespace App\Serves;
 
-use App\Repositories\RepositoryDeleteBasket;
+use App\Contracts\Repositories\DeleteBasketContract;
+use App\Repositories\DeleteBasket\RepositoryDeleteBasket;
 
 class ServiceDeleteBasket
 {
     private $delete;
 
-    public function __construct(RepositoryDeleteBasket $deleteBasket)
+    public function __construct(DeleteBasketContract $deleteBasket)
     {
         $this->delete = $deleteBasket;
     }
 
     public function deleteBasket($request,$id,$userId){
-        $this->delete->delete($request,$id,$userId);
+        $this->delete->basketDestroy($request,$id,$userId);
 
     }
 }

@@ -5,18 +5,18 @@ namespace App\Serves;
 use App\Contracts\Repositories\AdminDeleteContract;
 use App\Models\Basket;
 
-class ServiceDeleteAdmin
+class ServiceDelProductAndBasket
 {
-    private $deleteAdminDB;
+    private $deleteProductAndBask;
 
     public function __construct(AdminDeleteContract $adminDeleteContract)
     {
-        $this->deleteAdminDB = $adminDeleteContract;
+        $this->deleteProductAndBask = $adminDeleteContract;
     }
 
     public function deleteAdmin($id)
     {
-        $product = $this->deleteAdminDB->productBasketDelete($id);
+        $product = $this->deleteProductAndBask->productBasketDelete($id);
         if (!is_null($product)) {
             $product->basket->each(function (Basket $basket) {
                 $basket->delete();
