@@ -8,6 +8,7 @@ use App\Contracts\Repositories\BasketRepositoryContract;
 use App\Contracts\Repositories\CategoryRepositoryContract;
 use App\Contracts\Repositories\CreateCategoryContract;
 use App\Contracts\Repositories\DeleteBasketContract;
+use App\Contracts\Repositories\OrderCRUDContract;
 use App\Contracts\Repositories\ProductCreatContract;
 use App\Contracts\Repositories\ProductRepositoryContract;
 use App\Contracts\Repositories\UpdateBasketContract;
@@ -21,6 +22,7 @@ use App\Repositories\DeleteBasketAndProduct\RepositoryDelProduct;
 use App\Repositories\DeleteBasketAndProduct\RepositoryRawDelProduct;
 use App\Repositories\Basket\BasketRawRepository;
 use App\Repositories\Category\CategoryRawRepository;
+use App\Repositories\Order\OrderCRUD;
 use App\Repositories\Product\ProductRawRepository;
 use App\Repositories\ProductCreate\RepositoryCreateRawProduct;
 use App\Repositories\UpdateBasket\RepositoryRawUpdateBasket;
@@ -72,6 +74,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind(UpdateProductContract::class,function ($app){
             return new RepositoryRawUpdateProduct();
+        });
+        $this->app->bind(OrderCRUDContract::class,function ($app){
+            return new OrderCRUD();
         });
     }
 

@@ -10,8 +10,8 @@
                 $sum = 0;
             @endphp
             @if(count($products))
-
                 @foreach($products as $product)
+
                     <h4>
 
                         Товара {{$product->name}}
@@ -31,7 +31,6 @@
                     @php
                         $sum += $product->count * $product->price;
                     @endphp
-
                 @endforeach
 
                 <br>
@@ -49,7 +48,8 @@
                         @method('DELETE')
                         <input type="submit" value="Отказаться" name="refuse">
                     </form>
-            @endif
+                    @endif
+
             <div>
                 <br>
                 <br>
