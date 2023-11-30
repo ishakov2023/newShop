@@ -4,6 +4,7 @@ namespace App\Repositories\Basket;
 
 use App\Contracts\Repositories\BasketRepositoryContract;
 use App\Models\Basket;
+use Illuminate\Support\Facades\DB;
 
 class RepositoryBasket implements BasketRepositoryContract
 {
@@ -12,4 +13,7 @@ class RepositoryBasket implements BasketRepositoryContract
                 ->join('products', 'baskets.product_id', '=', 'products.id')
                 ->get();
         }
+    public function basketAmount($userId){
+
+    }
 }

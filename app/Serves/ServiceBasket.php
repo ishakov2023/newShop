@@ -15,4 +15,7 @@ class ServiceBasket
         public function productIsBasket($userId){
            return $this->repository->basket($userId);
         }
+    public function productIsBasketAmount($userId){
+        return $this->repository->basketAmount($userId);
+    }
 }

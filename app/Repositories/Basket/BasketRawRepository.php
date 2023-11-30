@@ -12,8 +12,8 @@ class BasketRawRepository implements BasketRepositoryContract
 
         return DB::select('SELECT * FROM `baskets` JOIN `products` ON `baskets`.product_id= `products`.`id` WHERE `baskets`.`user_id`= ?',[$userId]);
 
-//        return Basket::query()->where('user_id', $userId)
-//            ->join('products', 'baskets.product_id', '=', 'products.id')
-//            ->get();
+    }
+    public function basketAmount($userId){
+       return DB::select('SELECT * FROM `baskets` JOIN `products` ON `baskets`.product_id= `products`.`id` WHERE `baskets`.`user_id`= ? and `products`.`amount` > 0', [$userId]);
     }
 }

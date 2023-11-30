@@ -18,21 +18,21 @@ class OrderController extends Controller
         $userId = Auth::user()->id;
         $products = $serviceBasket->productIsBasket($userId);// переделать
         foreach ($products as $product) {
-            if ($product->count <= $product->amount) {
+            if ($product->count <= $product->amount && $product->amount != 0) {
                 $serviceCRUDOrder->OrderRead($product->id, $product->user_id, $product->count);
-            } else {
+            }else {
                 $products = DB::select('SELECT * FROM `baskets` JOIN `products` ON `baskets`.product_id= `products`.`id` WHERE `baskets`.`user_id`= ? and `products`.`amount`>0', [$userId]);
                 Basket::query()->where(['product_id' => $product->id, 'user_id' => $product->user_id])->update(['count' => $product->amount]);
                 return view('buy.buy', compact('products'));
             }
         }
-        return 'Покупка успешно оформленна';
+        return view('buy.index');
     }
 
     public function update(ServiceBasket $serviceBasket, $id, ServiceCRUDOrder $serviceCRUDOrder)
     {
         $userId = Auth::user()->id;
-        $products = $serviceBasket->productIsBasket($userId);
+        $products = $serviceBasket->productIsBasketAmount($userId);
         $serviceCRUDOrder->OrderUpdate($products, $userId);
         return 'Покупка успешно оформленна';
     }

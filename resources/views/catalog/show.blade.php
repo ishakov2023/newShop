@@ -27,11 +27,16 @@
                 Количество : {{$catalog->amount}}
             </p>
             <div class="col-12 col-md-4">
-
+                @if($catalog->amount !== 0 )
                 <form action="{{route('basket.create')}}" >
                     <input type="hidden" value="{{$catalog->id}}" name="id">
                     <button type="submit" name="add" class="btn btn-primary">{{__('Добавить')}}</button>
                 </form>
+                @else
+                    <form action="" >
+                        <button type="submit"  disabled>Нет в наличии </button>
+                    </form>
+                @endif
                 <br>
                 <form action="{{route('basket')}}" >
                     <button type="submit" name="add" class="btn btn-primary">{{__('Корзина')}}</button>

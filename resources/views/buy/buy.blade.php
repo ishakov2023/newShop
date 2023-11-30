@@ -29,7 +29,8 @@
                     </p>
 
                     @php
-                        $sum += $product->count * $product->price;
+                        $suma = $product->amount * $product->price;
+                        $sum +=$suma;
                     @endphp
                 @endforeach
 
