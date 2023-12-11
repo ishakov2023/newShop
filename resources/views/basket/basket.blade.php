@@ -9,62 +9,64 @@
             @php
                 $sum = 0;
             @endphp
-            @if(count($products))
+            @if(count($baskets))
+                @foreach($baskets as $basket)
+                    @if(is_null($basket->pivot->deleted_at))
+                    <h4>
 
-            @foreach($products as $product)
-                <h4>
+                        {{$basket->name}}
 
-                    {{$product->name}}
+                    </h4>
 
-                </h4>
+                    <p>
 
-                <p>
+                        {{$basket->description}}
 
-                    {{$product->description}}
-
-                </p>
-
-                <p class="small text-muted">
-                    Цена : {{$product->price}}
-                </p>
-                <form action="{{route('basket.update',$product->id)}}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <p class="small text-muted">
-                        Цена : {{$product->count}}
                     </p>
-                    <input type="hidden" value="{{$product->amount}}" name="amount">
-                    <input type="hidden" value="{{$product->count}}" name="count">
-                   <input type="submit" value="-" name="minus">
-                    <input type="submit" value="+" name="plus">
 
-                </form>
-                <form action="{{route('basket.delete',$product->id)}}" method="POST">
-                    @csrf
-                    @method("DELETE")
-                    <input type="submit" value="Удалить" name="delete">
-                </form>
+                    <p class="small text-muted">
+                        Цена : {{$basket->price}}
+                    </p>
+                    <form action="{{route('basket.update',$basket->id)}}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <p class="small text-muted">
+                            Цена : {{$basket->pivot->count}}
+                        </p>
+                        <input type="hidden" value="{{$basket->amount}}" name="amount">
+                        <input type="hidden" value="{{$basket->pivot->basket_id}}" name="basketId">
+                        <input type="hidden" value="{{$basket->pivot->count}}" name="count">
+                        <input type="submit" value="-" name="minus">
+                        <input type="submit" value="+" name="plus">
+
+                    </form>
+                    <form action="{{route('basket.delete',$basket->id)}}" method="POST">
+                        <input type="hidden" value="{{$basket->pivot->basket_id}}" name="basketId">
+                        @csrf
+                        @method("DELETE")
+                        <input type="submit" value="Удалить" name="delete">
+                    </form>
 
                     @php
-                         $sum += $product->count * $product->price;
+                        $sum += $basket->pivot->count * $basket->price;
                     @endphp
-
-            @endforeach
+                    @endif
+                @endforeach
 
                 <br>
                 <h4>
-                Ваша сумма заказа:{{$sum}}
+                    Ваша сумма заказа:{{$sum}}
                 </h4>
                 <br>
                 <form action="{{route('buy')}}" method="get">
                     @csrf
                     <input type="submit" value="Купить" name="buy">
                 </form>
-                @else
+            @else
                 <h4>
                     Ваша корзина пуста
                 </h4>
-               @endif
+            @endif
             <div>
                 <br>
                 <br>

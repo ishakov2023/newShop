@@ -5,13 +5,12 @@
 @section('content')
     <section>
         <div class="container">
-
             @php
                 $sum = 0;
             @endphp
-            @if(count($products))
-                @foreach($products as $product)
-
+            @if(!is_null($products))
+                @foreach($products->product as $product)
+                    @if(is_null($product->pivot->deleted_at))
                     <h4>
 
                         Товара {{$product->name}}
@@ -32,6 +31,7 @@
                         $suma = $product->amount * $product->price;
                         $sum +=$suma;
                     @endphp
+                    @endif
                 @endforeach
 
                 <br>
@@ -49,6 +49,7 @@
                         @method('DELETE')
                         <input type="submit" value="Отказаться" name="refuse">
                     </form>
+
                     @endif
 
             <div>

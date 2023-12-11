@@ -2,11 +2,11 @@
 
 namespace App\Repositories\Product;
 
-use App\Contracts\Repositories\ProductRepositoryContract;
+use App\Contracts\Repositories\ProductRepositoryCRUDContract;
 
 use Illuminate\Support\Facades\DB;
 
-class ProductRawRepository implements ProductRepositoryContract
+class ProductRawRepositoryCRUD implements ProductRepositoryCRUDContract
 {
     public function getAll()
     {

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Serves\CatalogService;
-use App\Serves\CategoryService;
+use App\Serves\ProductServiceCRUD;
+use App\Serves\CategoryServiceCRUD;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +14,7 @@ class CatalogController extends Controller
     public function __construct(){
         $this->middleware('user');
     }
-    public function index(Request $request,CatalogService $catalogService,CategoryService $categoryService)
+    public function index(Request $request, ProductServiceCRUD $catalogService, CategoryServiceCRUD $categoryService)
     {
         $categoryId = $request->input('category_id');
         $categories = $categoryService->getAllCategory();

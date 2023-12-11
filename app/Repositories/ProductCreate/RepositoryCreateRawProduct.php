@@ -5,7 +5,7 @@ namespace App\Repositories\ProductCreate;
 use App\Contracts\Repositories\ProductCreatContract;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
-use App\Repositories\Product\ProductRawRepository;
+use App\Repositories\Product\ProductRawRepositoryCRUD;
 use Illuminate\Support\Facades\DB;
 
 class RepositoryCreateRawProduct implements ProductCreatContract

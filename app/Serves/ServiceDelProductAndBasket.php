@@ -14,7 +14,7 @@ class ServiceDelProductAndBasket
         $this->deleteProductAndBask = $adminDeleteContract;
     }
 
-    public function deleteAdmin($id)
+    public function deleteProductAndBasket($id)
     {
         $product = $this->deleteProductAndBask->productBasketDelete($id);
         if (!is_null($product)) {

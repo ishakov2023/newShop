@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBasketsTable extends Migration
+class AlterBasketProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateBasketsTable extends Migration
      */
     public function up()
     {
-
-        Schema::create('baskets', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id')->index();
-            $table->integer('total_sum')->nullable();
-            $table->timestamps();
-
+        Schema::table('basket_products', function (Blueprint $table) {
+            $table->softDeletes()->after('count');
         });
     }
 
@@ -30,6 +25,8 @@ class CreateBasketsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('baskets');
+        Schema::table('basket_products', function (Blueprint $table) {
+            //
+        });
     }
 }

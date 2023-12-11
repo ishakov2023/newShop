@@ -27,4 +27,12 @@ class User extends Model implements Authenticatable
     public function admin(){
         return $this->admin;
     }
+    public function basket()
+    {
+        return $this->hasOne(Basket::class);
+    }
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

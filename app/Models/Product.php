@@ -24,6 +24,6 @@ class Product extends Model
 
     public function basket()
     {
-        return $this->hasMany(Basket::class);
+        return $this->belongsToMany(Basket::class,'basket_products')->withPivot('count','deleted_at');
     }
 }

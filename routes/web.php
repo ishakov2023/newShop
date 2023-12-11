@@ -40,7 +40,8 @@ Route::prefix('user')->middleware(['auth','user'])->group(function ()
     Route::put('basket/{id}',[BasketController::class,'update'])->name('basket.update');
     Route::delete('basket/{id}',[BasketController::class,'delete'])->name('basket.delete');
 
-    Route::get('order',[OrderController::class,'index'])->name('buy');
+    Route::get('zakaz',[OrderController::class, 'index'])->name('index.buy');
+    Route::get('order',[OrderController::class, 'makeOrder'])->name('buy');
     Route::put('order/{id}',[OrderController::class,'update'])->name('buy.update');
     Route::delete('order/{id}',[OrderController::class,'delete'])->name('buy.delete');
 });

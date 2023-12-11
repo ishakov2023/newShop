@@ -8,17 +8,19 @@ class Basket extends Model
 {
     protected $fillable =
         [
-            'product_id',
             'user_id',
-            'count',
         ];
     protected $casts =
         [
-            'count' => 'integer',
-
+            'total_sum' => 'integer',
         ];
     public function product()
     {
-        return $this->hasOne(Product::class);
+        return $this->belongsToMany(Product::class,'basket_products')->withPivot('count','deleted_at');
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
     }
 }

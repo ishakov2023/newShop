@@ -3,6 +3,8 @@
 namespace App\Serves;
 
 use App\Contracts\Repositories\OrderCRUDContract;
+use App\Models\BasketProduct;
+use App\Models\Order;
 
 class ServiceCRUDOrder
 {
@@ -13,18 +15,27 @@ class ServiceCRUDOrder
         $this->repositoryCRUDOrder = $CRUDContract;
     }
 
-    public function OrderRead($id, $userId, $count)
+    public function createOrder($createOrder, $userId)
     {
-        $this->repositoryCRUDOrder->readOrder($id, $userId, $count);
+        $this->repositoryCRUDOrder->createOrder($createOrder, $userId);
     }
 
-    public function OrderUpdate($products, $userId)
+    public function OrderUpdate($products, $userId, ServiceCRUDBasket $serviceBasket)
     {
-        $this->repositoryCRUDOrder->updateOrder($products, $userId);
+
+        foreach ($products->product as $product) {
+            if ($product->amount != 0) {
+                if ($product->pivot->count > $product->amount) {
+                    $this->repositoryCRUDOrder->updateOrderWithAmount($product->pivot->basket_id, $product->pivot->product_id, $product->amount, $userId, $serviceBasket);
+                } else {
+                    $this->repositoryCRUDOrder->updateOrder($product->pivot->basket_id, $product->pivot->product_id, $userId, $serviceBasket);
+                }
+            }
+        }
     }
 
-    public function OrderDestroy($userId)
+    public function OrderDestroy($products)
     {
-        $this->repositoryCRUDOrder->destroyOrder($userId);
+        $this->repositoryCRUDOrder->destroyOrder($products);
     }
 }
