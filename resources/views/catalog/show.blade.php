@@ -1,5 +1,5 @@
 @extends('layouts.base')
-@section('title',$catalog->name)
+@section('title',$product->name)
 
 
 @section('content')
@@ -9,27 +9,27 @@
 
             <h1>
 
-                {{$catalog->name}}
+                {{$product->name}}
 
             </h1>
 
             <p>
 
-                {{$catalog->description}}
+                {{$product->description}}
 
             </p>
 
             <p class="small text-muted">
-                Цена : {{$catalog->price}}
+                Цена : {{$product->price}}
             </p>
 
             <p class="small text-muted">
-                Количество : {{$catalog->amount}}
+                Количество : {{$product->amount}}
             </p>
             <div class="col-12 col-md-4">
-                @if($catalog->amount !== 0 )
+                @if($product->amount !== 0 )
                 <form action="{{route('basket.create')}}" >
-                    <input type="hidden" value="{{$catalog->id}}" name="id">
+                    <input type="hidden" value="{{$product->id}}" name="id">
                     <button type="submit" name="add" class="btn btn-primary">{{__('Добавить')}}</button>
                 </form>
                 @else

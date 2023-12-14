@@ -9,6 +9,6 @@ interface ProductRepositoryCRUDContract
 {
     public function getAll();
     public function getByCategoryId();
-    public function validateAll(ProductRequest $productRepository);
+    public function createProduct(ProductRequest $productRepository);
     public function updateProduct(Request $request,$id);
 }

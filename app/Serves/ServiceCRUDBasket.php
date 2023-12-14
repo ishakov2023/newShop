@@ -19,8 +19,12 @@ class ServiceCRUDBasket
         $this->repository = $repositoryBasket;
 
     }
-
-    public function basketWithProduct($userId)
+    /**
+     * Получение корзин и продуктов пользователя
+     *
+     * @var int $userId
+     */
+    public function basketWithProduct(int $userId)
     {
         return $this->repository->getByUser($userId);
     }
@@ -29,10 +33,24 @@ class ServiceCRUDBasket
     {
         return $this->repository->getBasketProduct();
     }
-    public function creatBasket($productId,$userId){
+
+    /**
+     * Сохарние коризины пользователя и корзины продуктов
+     *
+     * @var int $userId
+     * @var int $productId
+     */
+    public function creatBasketAndProductBasket(int $productId,int $userId){
         return $this->repository->createBasket($productId,$userId);
     }
-    public function updateBasket(Request $request,$productId,$basketId){
+    /**
+     * Увелечение или уменьшение количества товара в корзины до полного удаления
+     *
+     * @param Request $request
+     * @var int $basketId
+     * @var int $productId
+     */
+    public function updateBasket(Request $request, int $productId, int $basketId){
 
         if ($request->input('plus') && ($request->count < $request->amount)){
             return $this->repository->updateBasketPlus($request,$productId,$basketId);
@@ -42,16 +60,18 @@ class ServiceCRUDBasket
             return $this->repository->basketDestroy($request,$productId,$basketId);
         }
     }
-    public function deleteBasket($request,$id,$basketId)
+    /**
+     * Увелечение или уменьшение количества товара в корзины до полного удаления
+     *
+     * @param Request $request
+     * @var int $basketId
+     * @var int $id
+     */
+    public function deleteBasket($request,int $id,int $basketId)
     {
         if ($request->input('delete')) {
             return $this->repository->basketDestroy($request, $id, $basketId);
         }
-    }
-        public function softDeleteBasket($basketId,$id){
-
-                return $this->repository->basketDelete($basketId,$id);
-
     }
 
 }

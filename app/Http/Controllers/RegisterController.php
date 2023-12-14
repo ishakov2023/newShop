@@ -12,10 +12,16 @@ class RegisterController extends Controller
     {
         return view('register.index');
     }
+    /**
+     * Регистрация позьвателя
+     *
+     * @param StorePostRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(StorePostRequest $request)
     {
         $validate = $request->validated();
-          $user = User::query()->create([
+           User::query()->create([
               'name' => $validate['name'],
               'email' => $validate['email'],
               'password' => bcrypt($validate['password']),

@@ -57,11 +57,6 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->singleton(BasketRepositoryCRUDContract::class,function ($app){
             return new RepositoryCRUDBasket();
-//            return new BasketRawRepositoryCRUD();
-        });
-
-        $this->app->bind(AdminDeleteContract::class,function ($app){
-            return new RepositoryDelProduct();
         });
 
         $this->app->bind(OrderCRUDContract::class,function ($app){

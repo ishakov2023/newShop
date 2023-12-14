@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Serves\CategoryServiceCRUD;
 use App\Serves\LoginService;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\View;
 
 class LoginController extends Controller
 {
@@ -20,12 +23,17 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function index(Request $request)
+    public function index()
     {
 
         return view('login.index');
     }
-
+    /**
+     * Вход пользователя и проверка пользователя на права админа
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function login(Request $request)
     {
         $userData = $request->only('email', 'password');
@@ -38,6 +46,12 @@ class LoginController extends Controller
             return redirect()->route('login');
         }
     }
+    /**
+     * Выход из аундефикации пользователя
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
 
     public function logout(Request $request)
     {

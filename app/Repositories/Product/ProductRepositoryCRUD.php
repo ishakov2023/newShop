@@ -6,16 +6,26 @@ use App\Contracts\Repositories\ProductRepositoryCRUDContract;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use mysql_xdevapi\Collection;
 
 class ProductRepositoryCRUD implements ProductRepositoryCRUDContract
 {
 
-
+    /**
+     * Получение всех продуктов
+     *
+     * @return array|\Illuminate\Database\Eloquent\Collection
+     */
     public function getAll()
     {
         return Product::query()->get();
     }
-
+    /**
+     * Получение продуктов по фильтру категории
+     *
+     * @param null $categoryId
+     * @return array|\Illuminate\Database\Eloquent\Collection
+     */
     public function getByCategoryId($categoryId = null)
     {
         return Product::query()
@@ -23,8 +33,12 @@ class ProductRepositoryCRUD implements ProductRepositoryCRUDContract
                 $product->where('category_id', $categoryId);
             })->get();
     }
-
-    public function validateAll(ProductRequest $productRepository)
+    /**
+     * Сохранение продукта из панели админа
+     *
+     * @param ProductRequest $productRepository function
+     */
+    public function createProduct(ProductRequest $productRepository)
     {
         $validate = $productRepository->validated();
         return Product::query()->create([
@@ -35,7 +49,12 @@ class ProductRepositoryCRUD implements ProductRepositoryCRUDContract
             'category_id' => $validate['categoryIdNew'],
         ])->save();
     }
-
+    /**
+     * Изменение продукта из панели админа
+     *
+     * @param Request $request
+     * @var int $id
+     */
     public function updateProduct(Request $request, $id)
     {
         $name = $request->name;
@@ -50,8 +69,13 @@ class ProductRepositoryCRUD implements ProductRepositoryCRUDContract
                 'amount' => $amount,
             ]);
     }
-
-    public function productBasketDelete($id)
+    /**
+     * Получение продуктов по ID
+     *
+     * @return array|\Illuminate\Database\Eloquent\Collection
+     * @var int $id
+     */
+    public function getProduct(int $id)
     {
 //            пака хуй знает
         return  Product::find($id);

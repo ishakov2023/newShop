@@ -14,28 +14,45 @@ class ServiceCRUDOrder
     {
         $this->repositoryCRUDOrder = $CRUDContract;
     }
-
-    public function createOrder($createOrder, $userId)
+    /**
+     * Создание покупки
+     *
+     * @param $basketProducts
+     * @var int $userId
+     */
+    public function createOrder($basketProducts, int $userId)
     {
-        $this->repositoryCRUDOrder->createOrder($createOrder, $userId);
+        $this->repositoryCRUDOrder->createOrder($basketProducts, $userId);
     }
 
+    /**
+     * Создание покупки и измение корзины в зависимости с от количества требуемого товара из страницы недостоющего товара
+     *
+     * @param $products
+     * @param $userId
+     * @param ServiceCRUDBasket $serviceBasket
+     */
     public function OrderUpdate($products, $userId, ServiceCRUDBasket $serviceBasket)
     {
 
         foreach ($products->product as $product) {
             if ($product->amount != 0) {
                 if ($product->pivot->count > $product->amount) {
-                    $this->repositoryCRUDOrder->updateOrderWithAmount($product->pivot->basket_id, $product->pivot->product_id, $product->amount, $userId, $serviceBasket);
+                    $this->repositoryCRUDOrder->createOrderWithUpdateBasketAmount($product->pivot->basket_id, $product->pivot->product_id, $product->amount, $userId, $serviceBasket);
                 } else {
-                    $this->repositoryCRUDOrder->updateOrder($product->pivot->basket_id, $product->pivot->product_id, $userId, $serviceBasket);
+                    $this->repositoryCRUDOrder->createOrderMissingProductPage($product->pivot->basket_id, $product->pivot->product_id, $userId, $serviceBasket);
                 }
             }
         }
     }
-
-    public function OrderDestroy($products)
+    /**
+     * Отказ от товара из страницы недостоющего товара полное удаление некупленой корзины продуктов
+     *
+     * @param $basketWithProduct
+     *
+     */
+    public function OrderDestroy($basketWithProduct)
     {
-        $this->repositoryCRUDOrder->destroyOrder($products);
+        $this->repositoryCRUDOrder->destroyOrder($basketWithProduct);
     }
 }

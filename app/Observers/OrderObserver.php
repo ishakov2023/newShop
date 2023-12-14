@@ -17,6 +17,7 @@ class OrderObserver
      *
      * @param \App\Models\Order $order
      * @return void
+     * @throws OrderCreateException
      */
     public function creating(Order $order)
     {

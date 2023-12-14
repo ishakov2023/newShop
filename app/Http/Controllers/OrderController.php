@@ -20,6 +20,13 @@ class OrderController extends Controller
     public function index(){
         return view('buy.index');
     }
+    /**
+     * Создание покупки
+     *
+     * @param ServiceCRUDBasket $serviceBasket function
+     * @param ServiceCRUDOrder $serviceCRUDOrder function
+     * @return \Illuminate\View\View
+     */
     public function makeOrder(ServiceCRUDBasket $serviceBasket, ServiceCRUDOrder $serviceCRUDOrder)
     {
         $userId = Auth::user()->id;
@@ -36,7 +43,13 @@ class OrderController extends Controller
         return view('buy.index');
     }
 
-
+    /**
+     * Покупка товара
+     *
+     * @param ServiceCRUDBasket $serviceBasket function
+     * @param ServiceCRUDOrder $serviceCRUDOrder function
+     * @return \Illuminate\View\View
+     */
     public function update(ServiceCRUDBasket $serviceBasket, ServiceCRUDOrder $serviceCRUDOrder)
     {
         $userId = Auth::user()->id;
@@ -45,11 +58,18 @@ class OrderController extends Controller
         return view('buy.index');
 
     }
-    public function delete($id, ServiceCRUDBasket $serviceBasket,ServiceCRUDOrder $serviceCRUDOrder)
+    /**
+     * Удаление продуктов из корзины при отказе от покупки
+     *
+     * @param ServiceCRUDBasket $serviceBasket function
+     * @param ServiceCRUDOrder $serviceCRUDOrder function
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(ServiceCRUDBasket $serviceBasket, ServiceCRUDOrder $serviceCRUDOrder)
     {
         $userId = Auth::user()->id;
-        $products = $serviceBasket->basketWithProduct($userId);
-        $serviceCRUDOrder->OrderDestroy($products);
+        $basketWithProduct = $serviceBasket->basketWithProduct($userId);
+        $serviceCRUDOrder->OrderDestroy($basketWithProduct);
         return redirect()->route('user.catalog');
     }
 
